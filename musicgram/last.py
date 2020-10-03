@@ -32,11 +32,19 @@ class Client:
             artist = track['artist']['#text']
             title = track['name']
 
-            cover = self._client.get_album(artist, title).get_cover_image(size=pylast.SIZE_MEGA) or \
-                self._client.get_album(artist, title).get_cover_image(size=pylast.SIZE_EXTRA_LARGE) or \
-                self._client.get_album(artist, title).get_cover_image(size=pylast.SIZE_LARGE) or \
-                self._client.get_album(artist, title).get_cover_image(size=pylast.SIZE_MEDIUM) or \
-                track['image'][3]
+            cover = self._client.get_album(
+                artist,
+                title).get_cover_image(
+                size=pylast.SIZE_MEGA) or self._client.get_album(
+                artist,
+                title).get_cover_image(
+                size=pylast.SIZE_EXTRA_LARGE) or self._client.get_album(
+                    artist,
+                    title).get_cover_image(
+                        size=pylast.SIZE_LARGE) or self._client.get_album(
+                            artist,
+                            title).get_cover_image(
+                                size=pylast.SIZE_MEDIUM) or track['image'][3]
 
             playing = False
 

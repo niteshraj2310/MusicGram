@@ -1,4 +1,3 @@
-import re
 from typing import Union
 
 from . import constants, last, spotify
@@ -45,14 +44,15 @@ def main():
             track = client.get_current_track()
             if track.playing:
                 new_last_name = trim(track.artist, track.title)
-                telegram.update_profile_photo(tg_client, track.cover, len_profile_photos)
+                telegram.update_profile_photo(
+                    tg_client, track.cover, len_profile_photos)
                 telegram.update_profile_last_name(tg_client, new_last_name)
                 client.wait_for_new_track(track.id)
             else:
-                telegram.update_profile_photo(tg_client, initial_photo_len=len_profile_photos)
+                telegram.update_profile_photo(
+                    tg_client, initial_photo_len=len_profile_photos)
                 telegram.update_profile_last_name(tg_client, initial_last_name)
                 client.wait_for_track_play()
-
 
 
 if __name__ == "__main__":

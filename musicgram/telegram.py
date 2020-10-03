@@ -15,30 +15,33 @@ LOGGER = logging.getLogger(__name__)
 
 
 class MusicGramTelegramClient:
-    def __init__(self, api_id: str, api_hash: str, regenerate_db: bool = False):
+    def __init__(
+            self,
+            api_id: str,
+            api_hash: str,
+            regenerate_db: bool = False):
         self.id = api_id
         self.hash = api_hash
         self._client: TelegramClient = None
 
-
     @property
     def client(self) -> TelegramClient:
-        self._client =  TelegramClient("musicgram", self.id, self.hash)
+        self._client = TelegramClient("musicgram", self.id, self.hash)
         return self._client
 
     def update_profile_photo(
-            self,
-            client: TelegramClient,
-            file: BytesIO = None,
-           initial_photo_len: int = 0) -> None:
+        self,
+        client: TelegramClient,
+        file: BytesIO = None,
+            initial_photo_len: int = 0) -> None:
         try:
             pictures = client.get_profile_photos("me")
             if file:
                 client(
                     UploadProfilePhotoRequest(
-                        file=client.upload_file(file=file, file_name="cover.jpg")
-                    )
-                )
+                        file=client.upload_file(
+                            file=file,
+                            file_name="cover.jpg")))
             if pictures.total > initial_photo_len:
                 client(DeletePhotosRequest([pictures[0]]))
 

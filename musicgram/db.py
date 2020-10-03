@@ -13,7 +13,8 @@ class DataBase:
         self.filename = "musicgram.db"
         self._conn = None
         c = self._cursor()
-        c.execute("""select name from sqlite_master where type='table' and name ='telegram'""")
+        c.execute(
+            """select name from sqlite_master where type='table' and name ='telegram'""")
         if not c.fetchone():
             self._create_table(c, """telegram (
                                     last_name text,
@@ -23,7 +24,8 @@ class DataBase:
 
     def _cursor(self):
         if self._conn is None:
-            self._conn = sqlite3.connect(self.filename, check_same_thread=False)
+            self._conn = sqlite3.connect(
+                self.filename, check_same_thread=False)
         return self._conn.cursor()
 
     @staticmethod
